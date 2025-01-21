@@ -21,6 +21,7 @@
         <li><a href=/filmout/newFilms>Pelis nuevas</a></li>
         <li><a href={{route("byGenre", ['genre' => 'Comedia'])}}>Pelis genre</a></li>
         <li><a href={{route("byYear", ['year' => "1985"])}}>Pelis year</a></li>
+        <li><a href={{route("sortFilms")}}>Pelis sorted by year</a></li>
     </ul>
     <!-- Add Bootstrap JS and Popper.js (required for Bootstrap) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>

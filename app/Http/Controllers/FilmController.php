@@ -98,6 +98,19 @@ class FilmController extends Controller
         return view("films.list", ["films" => $films_filtered, "title" => $title]);
     }
 
+    /**
+     * List all films sorted by year in descending order
+     */
+    public function sortFilms()
+    {
+        $films = FilmController::readFilms();
+        usort($films, function ($a, $b) {
+            return $b['year'] <=> $a['year'];
+        });
+
+        $title = "Listado de Pelis Ordenadas por Año (Más Nuevas a Más Antiguas)";
+        return view('films.list', ["films" => $films, "title" => $title]);
+    }
 
     public function countFilms()
     {
