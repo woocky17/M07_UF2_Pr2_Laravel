@@ -16,6 +16,7 @@
 
     <h1 class="mt-4">Lista de Peliculas</h1>
     <ul>
+        <li><a href=/filmout/countFilms>Pelis totales</a></li>
         <li><a href=/filmout/oldFilms>Pelis antiguas</a></li>
         <li><a href=/filmout/newFilms>Pelis nuevas</a></li>
         <li><a href={{route("byGenre", ['genre' => 'Comedia'])}}>Pelis genre</a></li>
