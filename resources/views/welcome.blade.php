@@ -10,6 +10,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
     <!-- Include any additional stylesheets or scripts here -->
+    <style>
+        .custom-width {
+            max-width: 300px;
+        }
+    </style>
 </head>
 
 <body class="container">
@@ -23,6 +28,35 @@
         <li><a href={{route("byYear", ['year' => "1985"])}}>Pelis year</a></li>
         <li><a href={{route("sortFilms")}}>Pelis sorted by year</a></li>
     </ul>
+    <h1>Añadir Pelicula</h1>
+    <form action="addFilm" method="post">
+        <div class="form-group">
+            <label>Nombre</label>
+            <input type="text" class="form-control custom-width" />
+        </div>
+        <div class="form-group">
+            <label>Año</label>
+            <input type="number" class="form-control custom-width" />
+        </div>
+        <div class="form-group">
+            <label>Genero</label>
+            <input type="text" class="form-control custom-width" />
+        </div>
+        <div class="form-group">
+            <label>Pais</label>
+            <input type="text" class="form-control custom-width" />
+        </div>
+        <div class="form-group">
+            <label>Duración</label>
+            <input type="number" class="form-control custom-width" />
+        </div>
+        <div class="form-group">
+            <label>Imagen URL</label>
+            <input type="text" class="form-control custom-width" />
+        </div>
+
+        <button class="btn btn-primary">Añadir</button>
+    </form>
     <!-- Add Bootstrap JS and Popper.js (required for Bootstrap) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
