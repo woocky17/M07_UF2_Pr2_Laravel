@@ -29,30 +29,31 @@
         <li><a href={{route("sortFilms")}}>Pelis sorted by year</a></li>
     </ul>
     <h1>Añadir Pelicula</h1>
-    <form action="addFilm" method="post">
+    <form action={{route("addFilm")}} method="post">
+        @csrf
         <div class="form-group">
             <label>Nombre</label>
-            <input type="text" class="form-control custom-width" />
+            <input name="name" type="text" class="form-control custom-width" />
         </div>
         <div class="form-group">
             <label>Año</label>
-            <input type="number" class="form-control custom-width" />
+            <input name="year" type="number" class="form-control custom-width" />
         </div>
         <div class="form-group">
             <label>Genero</label>
-            <input type="text" class="form-control custom-width" />
+            <input name="genre" type="text" class="form-control custom-width" />
         </div>
         <div class="form-group">
             <label>Pais</label>
-            <input type="text" class="form-control custom-width" />
+            <input name="country" type="text" class="form-control custom-width" />
         </div>
         <div class="form-group">
             <label>Duración</label>
-            <input type="number" class="form-control custom-width" />
+            <input name="duration" type="number" class="form-control custom-width" />
         </div>
         <div class="form-group">
             <label>Imagen URL</label>
-            <input type="text" class="form-control custom-width" />
+            <input name="img_url" type="text" class="form-control custom-width" />
         </div>
 
         <button class="btn btn-primary">Añadir</button>

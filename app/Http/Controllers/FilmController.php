@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class FilmController extends Controller
@@ -119,5 +120,30 @@ class FilmController extends Controller
         $films = FilmController::readFilms();
         $count = count($films);
         return view('films.count', ["count" => $count, "title" => $title]);
+    }
+
+    public function addFilm(Request $request)
+    {
+
+
+        $films = Storage::json('/public/films.json');
+        $newFilm  =
+            [
+                "name" => $request->name,
+                "year" => $request->year,
+                "genre" => $request->genre,
+                "country" => $request->country,
+                "duration" => $request->duration,
+                "img_url" => $request->img_url,
+            ];
+
+
+        array_push($films, $newFilm);
+        Storage::put('/public/films.json', json_encode($films));
+
+
+        $title = "Peli añadida";
+        $films = FilmController::readFilms();
+        return view('films.list', ["films" => $films, "title" => $title]);
     }
 }
