@@ -22,6 +22,7 @@
     <h1 class="mt-4">Lista de Peliculas</h1>
     <ul>
         <li><a href=/filmout/countFilms>Pelis totales</a></li>
+        <li><a href="/filmout/films">Lista peliculas</a></li>
         <li><a href=/filmout/oldFilms>Pelis antiguas</a></li>
         <li><a href=/filmout/newFilms>Pelis nuevas</a></li>
         <li><a href={{route("byGenre", ['genre' => 'Comedia'])}}>Pelis genre</a></li>
@@ -54,9 +55,13 @@
         <div class="form-group">
             <label>Imagen URL</label>
             <input name="img_url" type="text" class="form-control custom-width" />
+
         </div>
 
         <button class="btn btn-primary">Añadir</button>
+        @if ($errors->any())
+            <p style="color:red">{{ $errors }}</p>
+        @endif
     </form>
     <!-- Add Bootstrap JS and Popper.js (required for Bootstrap) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>

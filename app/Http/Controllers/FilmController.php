@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\validateUrl;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -122,28 +123,66 @@ class FilmController extends Controller
         return view('films.count', ["count" => $count, "title" => $title]);
     }
 
+
+    public function listFilms($year = null, $genre = null)
+    {
+        $films_filtered = [];
+
+        $title = "Listado de todas las pelis";
+        $films = FilmController::readFilms();
+
+        if (is_null($year) && is_null($genre))
+            return view('films.list', ["films" => $films, "title" => $title]);
+
+        foreach ($films as $film) {
+            if ((!is_null($year) && is_null($genre)) && $film['year'] == $year) {
+                $title = "Listado de todas las pelis filtrado x año";
+                $films_filtered[] = $film;
+            } else if ((is_null($year) && !is_null($genre)) && strtolower($film['genre']) == strtolower($genre)) {
+                $title = "Listado de todas las pelis filtrado x categoria";
+                $films_filtered[] = $film;
+            } else if (!is_null($year) && !is_null($genre) && strtolower($film['genre']) == strtolower($genre) && $film['year'] == $year) {
+                $title = "Listado de todas las pelis filtrado x categoria y año";
+                $films_filtered[] = $film;
+            }
+        }
+        return view("films.list", ["films" => $films_filtered, "title" => $title]);
+    }
+
     public function addFilm(Request $request)
     {
 
+        function validateIfExist($films, $name)
+        {
+            foreach ($films as $film) {
+                if ($film['name'] == $name) {
+                    throw new \Exception("Film already exists");
+                }
+            }
+        }
 
-        $films = Storage::json('/public/films.json');
-        $newFilm  =
-            [
-                "name" => $request->name,
-                "year" => $request->year,
-                "genre" => $request->genre,
-                "country" => $request->country,
-                "duration" => $request->duration,
-                "img_url" => $request->img_url,
-            ];
+        try {
+            $films = Storage::json('/public/films.json');
+            $newFilm  =
+                [
+                    "name" => $request->name,
+                    "year" => $request->year,
+                    "genre" => $request->genre,
+                    "country" => $request->country,
+                    "duration" => $request->duration,
+                    "img_url" => $request->img_url,
+                ];
+
+            validateIfExist($films, $newFilm['name']);
+            array_push($films, $newFilm);
+            Storage::put('/public/films.json', json_encode($films));
 
 
-        array_push($films, $newFilm);
-        Storage::put('/public/films.json', json_encode($films));
-
-
-        $title = "Peli añadida";
-        $films = FilmController::readFilms();
-        return view('films.list', ["films" => $films, "title" => $title]);
+            $title = "Peli añadida";
+            $films = FilmController::readFilms();
+            return view('films.list', ["films" => $films, "title" => $title]);
+        } catch (\Exception $e) {
+            return view('welcome', ["error" => $e->getMessage()]);
+        }
     }
 }
