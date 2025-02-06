@@ -31,7 +31,7 @@ Route::middleware('year')->group(function () {
     });
     Route::middleware('url')->group(function () {
         Route::group(['prefix' => 'filmin'], function () {
-            Route::post('addFilm', [FilmController::class, "addFilm"])->name('addFilm');
+            Route::post('createFilm', [FilmController::class, "createFilm"])->name('createFilm');
         });
     });
 });

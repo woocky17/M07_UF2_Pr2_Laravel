@@ -149,40 +149,37 @@ class FilmController extends Controller
         return view("films.list", ["films" => $films_filtered, "title" => $title]);
     }
 
-    public function addFilm(Request $request)
+    private function isFilm($films, $name)
     {
-
-        function validateIfExist($films, $name)
-        {
-            foreach ($films as $film) {
-                if ($film['name'] == $name) {
-                    throw new \Exception("Film already exists");
-                }
+        foreach ($films as $film) {
+            if ($film['name'] == $name) {
+                return true;
             }
         }
+        return false;
+    }
+    public function createFilm(Request $request)
+    {
+        $newFilm  =
+            [
+                "name" => $request->name,
+                "year" => $request->year,
+                "genre" => $request->genre,
+                "country" => $request->country,
+                "duration" => $request->duration,
+                "img_url" => $request->img_url,
+            ];
 
-        try {
-            $films = Storage::json('/public/films.json');
-            $newFilm  =
-                [
-                    "name" => $request->name,
-                    "year" => $request->year,
-                    "genre" => $request->genre,
-                    "country" => $request->country,
-                    "duration" => $request->duration,
-                    "img_url" => $request->img_url,
-                ];
-
-            validateIfExist($films, $newFilm['name']);
-            array_push($films, $newFilm);
-            Storage::put('/public/films.json', json_encode($films));
-
-
-            $title = "Peli añadida";
-            $films = FilmController::readFilms();
-            return view('films.list', ["films" => $films, "title" => $title]);
-        } catch (\Exception $e) {
-            return view('welcome', ["error" => $e->getMessage()]);
+        $films = Storage::json('/public/films.json');
+        if (FilmController::isFilm($films, $newFilm['name'])) {
+            return view('welcome',  ['error' => "La pelicula ya existe"]);
         }
+        array_push($films, $newFilm);
+        Storage::put('/public/films.json', json_encode($films));
+
+
+        $title = "Peli añadida";
+        $films = FilmController::readFilms();
+        return view('films.list', ["films" => $films, "title" => $title]);
     }
 }
