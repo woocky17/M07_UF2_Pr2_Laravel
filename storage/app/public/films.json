@@ -1,11 +1,11 @@
 [
     {
-        "name": "La Rosa Púrpura del Cairo",
+        "name": "La Rosa P\u00farpura del Cairo",
         "year": 1985,
         "genre": "Drama",
         "country": "Spain",
         "duration": 120,
-        "img_url": "https://es.web.img2.acsta.net/medias/nmedia/18/79/45/34/20253823.jpg"
+        "img_url": "https:\/\/es.web.img2.acsta.net\/medias\/nmedia\/18\/79\/45\/34\/20253823.jpg"
     },
     {
         "name": "El Club de los Cinco",
@@ -13,7 +13,7 @@
         "genre": "Comedia",
         "country": "Spain",
         "duration": 120,
-        "img_url": "https://pics.filmaffinity.com/El_club_de_los_cinco-192309838-large.jpg"
+        "img_url": "https:\/\/pics.filmaffinity.com\/El_club_de_los_cinco-192309838-large.jpg"
     },
     {
         "name": "Forrest Gump",
@@ -21,15 +21,15 @@
         "genre": "Drama",
         "country": "Spain",
         "duration": 120,
-        "img_url": "https://pics.filmaffinity.com/Forrest_Gump-212765827-large.jpg"
+        "img_url": "https:\/\/pics.filmaffinity.com\/Forrest_Gump-212765827-large.jpg"
     },
     {
         "name": "Arrival",
         "year": 2016,
-        "genre": "Ciencia Ficción",
+        "genre": "Ciencia Ficci\u00f3n",
         "country": "Romania",
         "duration": 120,
-        "img_url": "https://pics.filmaffinity.com/La_llegada-686966912-large.jpg"
+        "img_url": "https:\/\/pics.filmaffinity.com\/La_llegada-686966912-large.jpg"
     },
     {
         "name": "As Bestas",
@@ -37,6 +37,14 @@
         "genre": "Drama",
         "country": "Romania",
         "duration": 120,
-        "img_url": "https://pics.filmaffinity.com/As_bestas-275688233-large.jpg"
+        "img_url": "https:\/\/pics.filmaffinity.com\/As_bestas-275688233-large.jpg"
+    },
+    {
+        "name": "La vacas locas",
+        "year": "2005",
+        "genre": "Comedia",
+        "country": "Espa\u00f1a",
+        "duration": "120",
+        "img_url": "https:\/\/imgs.search.brave.com\/5qdQZ3ydKxIxppFdL10aCACQriv61LxK_Z0yGkVXIcg\/rs:fit:860:0:0:0\/g:ce\/aHR0cHM6Ly9pbWFn\/ZXMucGV4ZWxzLmNv\/bS9waG90b3MvNTEz\/MTEvY293LWNhbGYt\/Y2F0dGxlLXN0b2Nr\/LTUxMzExLmpwZWc_\/YXV0bz1jb21wcmVz\/cyZjcz10aW55c3Jn\/YiZkcHI9MSZ3PTUw\/MA"
     }
 ]
