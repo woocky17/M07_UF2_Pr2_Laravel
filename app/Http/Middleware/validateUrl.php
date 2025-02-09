@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Session;
 
 class validateUrl
 {
@@ -18,6 +19,7 @@ class validateUrl
         $url = $request->img_url;
 
         if (!$this->isValidUrl($url)) {
+            Session::flash('error', 'La URL proporcionada no es válida.');
             return redirect('/');
         }
         return $next($request);

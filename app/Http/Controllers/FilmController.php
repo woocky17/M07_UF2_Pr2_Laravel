@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Middleware\validateUrl;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -130,9 +130,10 @@ class FilmController extends Controller
 
         $title = "Listado de todas las pelis";
         $films = FilmController::readFilms();
+        $count = count($films);
 
         if (is_null($year) && is_null($genre))
-            return view('films.list', ["films" => $films, "title" => $title]);
+            return view('films.list', ["films" => $films, "count" => $count, "title" => $title]);
 
         foreach ($films as $film) {
             if ((!is_null($year) && is_null($genre)) && $film['year'] == $year) {
@@ -146,7 +147,7 @@ class FilmController extends Controller
                 $films_filtered[] = $film;
             }
         }
-        return view("films.list", ["films" => $films_filtered, "title" => $title]);
+        return view("films.list", ["films" => $films_filtered,  "title" => $title]);
     }
 
     private function isFilm($films, $name)
@@ -172,13 +173,14 @@ class FilmController extends Controller
 
         $films = Storage::json('/public/films.json');
         if (FilmController::isFilm($films, $newFilm['name'])) {
-            return view('welcome',  ['error' => "La pelicula ya existe"]);
+            Session::flash('error', 'Esta película ya existe.');
+            return redirect('/');
         }
         array_push($films, $newFilm);
         Storage::put('/public/films.json', json_encode($films));
 
 
-        $title = "Peli añadida";
+        $title = "Pelicula añadida";
         $films = FilmController::readFilms();
         return view('films.list', ["films" => $films, "title" => $title]);
     }
