@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Film extends Model
+class Actor extends Model
 {
     use HasFactory;
 
@@ -14,7 +14,7 @@ class Film extends Model
      *
      * @var string
      */
-    protected $table = 'films';
+    protected $table = 'actors';
 
     /**
      * Los atributos que pueden ser asignados masivamente.
@@ -23,19 +23,18 @@ class Film extends Model
      */
     protected $fillable = [
         'name',
-        'year',
-        'genre',
+        'surname',
+        'birthdate',
         'country',
-        'duration',
         'img_url',
     ];
 
     /**
-     * Relación muchos a muchos con Actor.
+     * Relación muchos a muchos con Film.
      */
-    public function actors()
+    public function films()
     {
-        return $this->belongsToMany(Actor::class, 'film_actor', 'film_id', 'actor_id')
+        return $this->belongsToMany(Film::class, 'film_actor', 'actor_id', 'film_id')
             ->withTimestamps();
     }
 }
