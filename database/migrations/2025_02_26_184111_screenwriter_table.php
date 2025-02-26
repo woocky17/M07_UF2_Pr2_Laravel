@@ -8,26 +8,22 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('film_actor', function (Blueprint $table) {
+        Schema::create('screenwriters', function (Blueprint $table) {
             $table->foreignId('film_id')->constrained('films')->onDelete('cascade');
-            $table->foreignId('actor_id')->constrained('actors')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
-            $table->primary(['film_id', 'actor_id']);
+            $table->primary(['film_id', 'user_id']);
         });
     }
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
-        Schema::dropIfExists('film_actor');
+        Schema::dropIfExists('screenwriters');
     }
 };
