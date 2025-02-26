@@ -18,7 +18,7 @@ class FilmFactory extends Factory
     {
         return [
             'name' => $this->faker->sentence(3),
-            'year' => $this->faker->year,
+            'year' => $this->faker->numberBetween(1900, 2024),
             'genre' => $this->faker->word,
             'country' => $this->faker->country,
             'duration' => $this->faker->numberBetween(90, 180),
