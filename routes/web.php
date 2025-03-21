@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActorController;
 use App\Http\Controllers\FilmController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,5 +34,12 @@ Route::middleware('year')->group(function () {
         Route::group(['prefix' => 'filmin'], function () {
             Route::post('createFilm', [FilmController::class, "createFilm"])->name('createFilm');
         });
+    });
+
+
+    Route::group(['prefix' => 'actorout'], function () {
+        Route::get('listActors', [ActorController::class, "listActors"])->name("listActors");
+        Route::get('countActors', [ActorController::class, "countActors"])->name("countActors");
+        Route::get('getByDecade/{year?}', [ActorController::class, "getByDecade"])->name("getByDecade");
     });
 });
