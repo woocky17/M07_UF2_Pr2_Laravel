@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Film;
 
 class FilmController extends Controller
 {
@@ -14,13 +15,13 @@ class FilmController extends Controller
      */
     public static function readFilms(): array
     {
-        $films = Storage::json('/public/films.json');
+        $filmsDb = FilmController::getFilmFromDb();
+        $filmsJson = Storage::json('/public/films.json');
+
+        $films = array_merge($filmsDb, $filmsJson);
         return $films;
     }
-    /**
-     * List films older than input year 
-     * if year is not infomed 2000 year will be used as criteria
-     */
+
     public function listOldFilms($year = null)
     {
         $old_films = [];
@@ -159,7 +160,13 @@ class FilmController extends Controller
         }
         return false;
     }
-    public function createFilm(Request $request)
+    public static function getFilmFromDb()
+    {
+        return Film::select('name', 'year', 'genre', 'country', 'duration', 'img_url')
+            ->get()
+            ->toArray();
+    }
+    public function createFilmOnJson(Request $request)
     {
         $newFilm  =
             [
@@ -182,6 +189,26 @@ class FilmController extends Controller
 
         $title = "Pelicula añadida";
         $films = FilmController::readFilms();
-        return view('films.list', ["films" => $films, "title" => $title]);
+    }
+
+    public function createFilmOnDb(Request $request)
+    {
+        $newFilm  =
+            [
+                "name" => $request->name,
+                "year" => $request->year,
+                "genre" => $request->genre,
+                "country" => $request->country,
+                "duration" => $request->duration,
+                "img_url" => $request->img_url,
+            ];
+        Film::table('films')->insert($newFilm);
+    }
+
+    public function createFilm(Request $request)
+    {
+        // FilmController::createFilmOnJson($request);
+        FilmController::createFilmOnDb($request);
+        return view('welcome');
     }
 }

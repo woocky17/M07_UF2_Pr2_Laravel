@@ -86,18 +86,46 @@
                             Género</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('byYear', ['year' => '1985']) }}">📅 Año</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('sortFilms') }}">🔀 Ordenar</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/filmout/sortFilms">🔀 Ordenar</a></li>
+
                 </ul>
             </div>
         </div>
     </nav>
 
 
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">🎬 Actores</a>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="/actorout/listActors">🎭 Actores</a></li>
+                    <li class="nav-item">
+                        <select class="form-control" onchange="location.href='/actorout/getByDecade/' + this.value">
+                            <option value="">📆 Seleccionar década</option>
+                            <option value="1980">1980 - 1989</option>
+                            <option value="1990">1990 - 1999</option>
+                            <option value="2000">2000 - 2009</option>
+                            <option value="2010">2010 - 2019</option>
+                            <option value="2020">2020 - 2029</option>
+                        </select>
+                    </li>
+                    <li>
+                    <li class="nav-item"><a class="nav-link" href="/actorout/countActors">🎭 Actores Totales</a></li>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
     <div class="container">
         <div class="container-content">
             @yield('content')
         </div>
     </div>
+
+
 
     <div class="container">
         <div class="footer">
