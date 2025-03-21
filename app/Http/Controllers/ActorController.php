@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Actor;
 use Illuminate\Support\Facades\DB;
 
 class ActorController extends Controller
@@ -41,6 +42,13 @@ class ActorController extends Controller
 
     public function deleteActor($id)
     {
-        DB::table('actors')->where('id', '=', $id)->delete();
+
+
+        $deleted = Actor::where('id', '=', $id)->delete();
+        if ($deleted) {
+            return response()->json(['action' => 'delete', 'status' => true]);
+        } else {
+            return response()->json(['action' => 'delete', 'status' => false]);
+        }
     }
 }
