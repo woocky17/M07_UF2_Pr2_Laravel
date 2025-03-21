@@ -33,7 +33,10 @@
                 <label>Imagen URL</label>
                 <input name="img_url" type="text" class="form-control custom-width" />
             </div>
-
+            <div class="form-group form-check">
+                <input name="use_database" type="checkbox" class="form-check-input" id="useDatabase" checked />
+                <label class="form-check-label" for="useDatabase">Guardar en base de datos</label>
+            </div>
             <button class="btn btn-primary">Añadir</button>
             @if (!empty($error))
                 <p class="alert alert-danger">{{ $error }}</p>

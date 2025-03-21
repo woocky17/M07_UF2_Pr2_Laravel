@@ -189,8 +189,9 @@ class FilmController extends Controller
 
     public function createFilm(Request $request)
     {
-        $rand = rand(0, 1);
-        if ($rand == 0) {
+        $useDatabase = $request->input('use_database', true);
+
+        if ($useDatabase) {
             FilmController::createFilmOnJson($request);
         } else {
             FilmController::createFilmOnDb($request);
