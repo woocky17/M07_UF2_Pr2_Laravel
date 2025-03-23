@@ -191,7 +191,7 @@ class FilmController extends Controller
     {
         $useDatabase = $request->input('use_database', true);
 
-        if ($useDatabase) {
+        if ($useDatabase == "false") {
             FilmController::createFilmOnJson($request);
         } else {
             FilmController::createFilmOnDb($request);
@@ -199,5 +199,23 @@ class FilmController extends Controller
 
         $title = "Pelicula creada";
         return view("welcome", ["films" => FilmController::readFilms(),  "title" => $title]);
+    }
+
+    public function getActorsByFilm($id)
+    {
+        $film = Film::with('actors')->find($id);
+
+        if (!$film) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Film not found'
+            ], 404);
+        }
+
+        return response()->json([
+            'status' => true,
+            'film' => $film->name,
+            'actors' => $film->actors
+        ], 200);
     }
 }
